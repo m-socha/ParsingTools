@@ -5,6 +5,8 @@ import java.util.*;
  */
 public class ContextFreeGrammar {
 
+    private static final String EMPTY_STRING = "ε";
+
     private Map<String, Set<List<String>>> mRuleMap = new HashMap();
 
     public void addRule(String rule) {
