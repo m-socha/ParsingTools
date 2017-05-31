@@ -44,4 +44,9 @@ public class ContextFreeGrammar {
             return false;
         }
     }
+
+    @Override
+    public int hashCode() {
+        return mRuleMap.hashCode();
+    }
 }

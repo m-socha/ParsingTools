@@ -31,6 +31,11 @@ public abstract class Scanner {
                 return false;
             }
         }
+
+        @Override
+        public int hashCode() {
+            return 31 * mTokenId.hashCode() + mLexeme.hashCode();
+        }
     }
 
     public static class TokenizedString {
