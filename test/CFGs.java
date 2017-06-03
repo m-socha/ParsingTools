@@ -14,6 +14,7 @@ public class CFGs {
         expressionCFG.addRule("expression", new ArrayList<>(Arrays.asList(new String[] {"expression", "MINUS", "expression"})));
         expressionCFG.addRule("expression", new ArrayList<>(Arrays.asList(new String[] {"expression", "MULTIPLY", "expression"})));
         expressionCFG.addRule("expression", new ArrayList<>(Arrays.asList(new String[] {"expression", "DIVIDE", "expression"})));
+        expressionCFG.setLeadingNonterminal("expression");
         return expressionCFG;
     }
 

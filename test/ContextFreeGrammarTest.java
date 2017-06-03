@@ -17,6 +17,8 @@ public class ContextFreeGrammarTest {
         expectedNonterminals.add("expression");
         assertEquals(expectedNonterminals, expressionCFG.getNonterminals());
 
+        assertEquals("expression", expressionCFG.getLeadingNonterminal());
+
         Set<List<String>> expectedProductions = new HashSet();
         expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"LEFT_BRACKET", "expression", "RIGHT_BRACKET"})));
         expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"NUMBER"})));
@@ -36,6 +38,7 @@ public class ContextFreeGrammarTest {
         expressionCFG.addRule("expression -> expression MINUS expression");
         expressionCFG.addRule("expression -> expression MULTIPLY expression");
         expressionCFG.addRule("expression -> expression DIVIDE expression");
+        expressionCFG.setLeadingNonterminal("expression");
         assertEquals(CFGs.getExpressionCFG(), expressionCFG);
     }
 }

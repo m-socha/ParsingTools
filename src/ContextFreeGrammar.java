@@ -8,6 +8,7 @@ public class ContextFreeGrammar {
     private static final String EMPTY_STRING = "ε";
 
     private Map<String, Set<List<String>>> mRuleMap = new HashMap();
+    private String mLeadingNonterminal;
 
     public void addRule(String rule) {
         String[] splitRule = rule.split("\\s+");
@@ -29,6 +30,10 @@ public class ContextFreeGrammar {
         }
     }
 
+    public void setLeadingNonterminal(String leadingNonterminal) {
+        mLeadingNonterminal = leadingNonterminal;
+    }
+
     public Set<String> getNonterminals() {
         return mRuleMap.keySet();
     }
@@ -37,11 +42,16 @@ public class ContextFreeGrammar {
         return mRuleMap.get(nonterminal);
     }
 
+    public String getLeadingNonterminal() {
+        return mLeadingNonterminal;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof ContextFreeGrammar) {
             ContextFreeGrammar contextFreeGrammar = (ContextFreeGrammar) o;
-            return mRuleMap.equals(contextFreeGrammar.mRuleMap);
+            return mRuleMap.equals(contextFreeGrammar.mRuleMap)
+                    && mLeadingNonterminal.equals(contextFreeGrammar.mLeadingNonterminal);
         } else {
             return false;
         }
@@ -49,6 +59,6 @@ public class ContextFreeGrammar {
 
     @Override
     public int hashCode() {
-        return mRuleMap.hashCode();
+        return 31 * mRuleMap.hashCode() + mLeadingNonterminal.hashCode();
     }
 }
