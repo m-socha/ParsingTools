@@ -5,7 +5,7 @@ import java.util.*;
  */
 public class ContextFreeGrammar {
 
-    private static final String EMPTY_STRING = "ε";
+    public static final String EMPTY_STRING = "ε";
 
     private Map<String, Set<List<String>>> mRuleMap = new HashMap();
     private String mLeadingNonterminal;

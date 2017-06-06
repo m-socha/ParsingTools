@@ -14,19 +14,19 @@ public class ContextFreeGrammarTest {
         ContextFreeGrammar expressionCFG = CFGs.getExpressionCFG();
 
         Set<String> expectedNonterminals = new HashSet();
-        expectedNonterminals.add("expression");
+        expectedNonterminals.add(CFGs.EXPRESSION_EXPRESSION_ID);
         assertEquals(expectedNonterminals, expressionCFG.getNonterminals());
 
-        assertEquals("expression", expressionCFG.getLeadingNonterminal());
+        assertEquals(CFGs.EXPRESSION_EXPRESSION_ID, expressionCFG.getLeadingNonterminal());
 
         Set<List<String>> expectedProductions = new HashSet();
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"LEFT_BRACKET", "expression", "RIGHT_BRACKET"})));
+        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"LEFT_BRACKET", CFGs.EXPRESSION_EXPRESSION_ID, "RIGHT_BRACKET"})));
         expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"NUMBER"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"expression", "PLUS", "expression"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"expression", "MINUS", "expression"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"expression", "MULTIPLY", "expression"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"expression", "DIVIDE", "expression"})));
-        assertEquals(expectedProductions, expressionCFG.getRulesForNonterminal("expression"));
+        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "PLUS", CFGs.EXPRESSION_EXPRESSION_ID})));
+        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "MINUS", CFGs.EXPRESSION_EXPRESSION_ID})));
+        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "MULTIPLY", CFGs.EXPRESSION_EXPRESSION_ID})));
+        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "DIVIDE", CFGs.EXPRESSION_EXPRESSION_ID})));
+        assertEquals(expectedProductions, expressionCFG.getRulesForNonterminal(CFGs.EXPRESSION_EXPRESSION_ID));
     }
 
     @Test
