@@ -1,3 +1,5 @@
+import parsingtools.MaximalMunchScanner;
+import parsingtools.Scanner;
 import org.junit.Test;
 
 import java.util.ArrayList;

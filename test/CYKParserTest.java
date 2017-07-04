@@ -1,3 +1,6 @@
+import parsingtools.CYKParser;
+import parsingtools.ContextFreeGrammar;
+import parsingtools.Parser;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -132,6 +135,31 @@ public class CYKParserTest {
             }}));
             add(new Parser.ParseTree(CFGs.EMPTY_STRING_TEST_B, new ArrayList() {{
                 add(new Parser.ParseTree(new Parser.Token(CFGs.EMPTY_STRING_TEST_C, "c")));
+            }}));
+        }});
+
+        assertEquals(expectedParseTree, expressionParseTree);
+    }
+
+    @Test
+    public void matrixMultGrammarTest() {
+        List<Parser.Token> tokens = new ArrayList();
+        tokens.add(new Parser.Token(CFGs.MATRIX_TOKEN, "A"));
+        tokens.add(new Parser.Token(CFGs.MATRIX_TOKEN, "B"));
+
+        Parser parser = new CYKParser();
+        Parser.ParseTree expressionParseTree = parser.parse(tokens, CFGs.getMatrixMultGrammar());
+
+        Parser.ParseTree expectedParseTree = new Parser.ParseTree(CFGs.MATRIX_NUMBER_EXPRESSION, new ArrayList() {{
+            add(new Parser.ParseTree(CFGs.MATRIX_EXPRESSION, new ArrayList() {{
+                add(new Parser.ParseTree(CFGs.MATRIX_MULT_EXPRESSION, new ArrayList() {{
+                    add(new Parser.ParseTree(CFGs.MATRIX_EXPRESSION, new ArrayList() {{
+                        add(new Parser.ParseTree(new Parser.Token(CFGs.MATRIX_TOKEN, "A")));
+                    }}));
+                    add(new Parser.ParseTree(CFGs.MATRIX_EXPRESSION, new ArrayList() {{
+                        add(new Parser.ParseTree(new Parser.Token(CFGs.MATRIX_TOKEN, "B")));
+                    }}));
+                }}));
             }}));
         }});
 

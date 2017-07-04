@@ -1,3 +1,5 @@
+import parsingtools.ContextFreeGrammar;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,6 +20,14 @@ public class CFGs {
     public static final String EMPTY_STRING_TEST_A = "A";
     public static final String EMPTY_STRING_TEST_B = "B";
     public static final String EMPTY_STRING_TEST_C = "c";
+
+    public static final String MATRIX_NUMBER_EXPRESSION = "MATRIX_NUMBER_EXPRESSION";
+    public static final String MATRIX_EXPRESSION = "MATRIX_EXPRESSION";
+    public static final String NUMBER_EXPRESSION = "NUMBER_EXPRESSION";
+    public static final String MATRIX_MULT_EXPRESSION = "MATRIX_MULT_EXPRESSION";
+    public static final String MATRIX_SCALE_EXPRESSION = "MATRIX_SCALE_EXPRESSION";
+    public static final String MATRIX_TOKEN = "MATRIX_TOKEN";
+    public static final String NUMBER_TOKEN = "NUMBER_TOKEN";
 
     public static ContextFreeGrammar getExpressionCFG() {
         ContextFreeGrammar expressionCFG = new ContextFreeGrammar();
@@ -40,4 +50,19 @@ public class CFGs {
         emptyStringCFG.setLeadingNonterminal(EMPTY_STRING_TEST_A);
         return emptyStringCFG;
     }
+
+    public static ContextFreeGrammar getMatrixMultGrammar() {
+        ContextFreeGrammar matrixMultGrammar = new ContextFreeGrammar();
+        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_EXPRESSION})));
+        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_EXPRESSION})));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_TOKEN})));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_MULT_EXPRESSION})));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_SCALE_EXPRESSION})));
+        matrixMultGrammar.addRule(MATRIX_MULT_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_EXPRESSION, MATRIX_EXPRESSION})));
+        matrixMultGrammar.addRule(MATRIX_SCALE_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_EXPRESSION, MATRIX_EXPRESSION})));
+        matrixMultGrammar.addRule(NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_TOKEN})));
+        matrixMultGrammar.setLeadingNonterminal(MATRIX_NUMBER_EXPRESSION);
+        return matrixMultGrammar;
+    }
 }
+

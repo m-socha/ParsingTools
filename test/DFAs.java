@@ -1,3 +1,5 @@
+import parsingtools.DFA;
+
 /**
  * Created by michael on 5/21/17.
  */

@@ -1,3 +1,5 @@
+package parsingtools;
+
 import java.util.*;
 
 /**
@@ -5,11 +7,11 @@ import java.util.*;
  */
 public class CYKParser extends Parser {
 
-    private List<Token> mTokens;
+    private List<Parser.Token> mTokens;
     private ContextFreeGrammar mGrammar;
-    Map<String, ParseTree>[][] mMemoizationTable;
+    Map<String, Parser.ParseTree>[][] mMemoizationTable;
 
-    public ParseTree parse(List<Token> tokens, ContextFreeGrammar grammar) {
+    public Parser.ParseTree parse(List<Parser.Token> tokens, ContextFreeGrammar grammar) {
         mTokens = tokens;
         mGrammar = grammar;
         mMemoizationTable = new HashMap[tokens.size() + 1][tokens.size() + 1];
@@ -22,39 +24,39 @@ public class CYKParser extends Parser {
         return parse(0, tokens.size(), grammar.getLeadingNonterminal());
     }
 
-    private ParseTree parse(int startingIndex, int length, String rootElement) {
-        ParseTree memoizedParseTree = mMemoizationTable[startingIndex][length].get(rootElement);
+    private Parser.ParseTree parse(int startingIndex, int length, String rootElement) {
+        Parser.ParseTree memoizedParseTree = mMemoizationTable[startingIndex][length].get(rootElement);
         if (memoizedParseTree != null) {
             return memoizedParseTree;
         } else {
-            mMemoizationTable[startingIndex][length].put(rootElement, new ParseTree());
+            mMemoizationTable[startingIndex][length].put(rootElement, new Parser.ParseTree());
         }
 
         if (mGrammar.getNonterminals().contains(rootElement)) {
             for (List<String> productionResult : mGrammar.getRulesForNonterminal(rootElement)) {
-                List<ParseTree> children = getChildren(startingIndex, length, productionResult);
+                List<Parser.ParseTree> children = getChildren(startingIndex, length, productionResult);
                 if (children != null) {
-                    ParseTree parseTree = new ParseTree(rootElement, children);
+                    Parser.ParseTree parseTree = new Parser.ParseTree(rootElement, children);
                     mMemoizationTable[startingIndex][length].put(rootElement, parseTree);
                     return parseTree;
                 }
             }
         } else {
             if (length == 0 && rootElement.equals(ContextFreeGrammar.EMPTY_STRING)) {
-                ParseTree parseTree = new ParseTree(new Token(ContextFreeGrammar.EMPTY_STRING, ""));
+                Parser.ParseTree parseTree = new Parser.ParseTree(new Parser.Token(ContextFreeGrammar.EMPTY_STRING, ""));
                 mMemoizationTable[startingIndex][length].put(rootElement, parseTree);
                 return parseTree;
             } else if (length == 1 && rootElement.equals(mTokens.get(startingIndex).getTokenId())) {
-                ParseTree parseTree = new ParseTree(mTokens.get(startingIndex));
+                Parser.ParseTree parseTree = new Parser.ParseTree(mTokens.get(startingIndex));
                 mMemoizationTable[startingIndex][length].put(rootElement, parseTree);
                 return parseTree;
             }
         }
 
-        return new ParseTree();
+        return new Parser.ParseTree();
     }
 
-    List<ParseTree> getChildren(int startingIndex, int length, List<String> productionResult) {
+    List<Parser.ParseTree> getChildren(int startingIndex, int length, List<String> productionResult) {
 
         if (productionResult.size() >= 2) {
             for (String element : productionResult) {
@@ -62,17 +64,21 @@ public class CYKParser extends Parser {
                     if (parse(startingIndex, i, element).parsingSuccessful()) {
                         List<String> productionResultWithoutFirstItem = new ArrayList(productionResult);
                         productionResultWithoutFirstItem.remove(0);
-                        List<ParseTree> childrenAfterFirst = getChildren(startingIndex + i, length - i, productionResultWithoutFirstItem);
+                        List<Parser.ParseTree> childrenAfterFirst = getChildren(startingIndex + i, length - i, productionResultWithoutFirstItem);
                         if (childrenAfterFirst != null) {
                             childrenAfterFirst.add(0, mMemoizationTable[startingIndex][i].get(element));
                             return childrenAfterFirst;
                         }
                     }
+
+                    if (i == length) {
+                        return null;
+                    }
                 }
             }
         } else if (parse(startingIndex, length, productionResult.get(0)).parsingSuccessful()) {
-            List<ParseTree> finalTreeList = new ArrayList();
-            ParseTree finalTree = mMemoizationTable[startingIndex][length].get(productionResult.get(0));
+            List<Parser.ParseTree> finalTreeList = new ArrayList();
+            Parser.ParseTree finalTree = mMemoizationTable[startingIndex][length].get(productionResult.get(0));
             finalTreeList.add(finalTree);
             return finalTreeList;
         }

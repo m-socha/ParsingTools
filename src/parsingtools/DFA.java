@@ -1,3 +1,5 @@
+package parsingtools;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +61,7 @@ public class DFA {
         if (mSourceState != null) {
             mCurrentState = mSourceState;
         } else {
-            throw new IllegalStateException("DFA has no source state.");
+            throw new IllegalStateException("com.parsingtools.DFA has no source state.");
         }
     }
 

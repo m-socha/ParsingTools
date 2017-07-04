@@ -1,6 +1,7 @@
+package parsingtools;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.Observer;
 
 /**
  * Created by michael on 5/30/17.

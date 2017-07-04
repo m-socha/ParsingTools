@@ -1,3 +1,5 @@
+package parsingtools;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,8 +8,8 @@ import java.util.List;
  */
 public class MaximalMunchScanner extends Scanner {
 
-    public TokenizedString tokenize(DFA dfa, String s) {
-        List<Token> tokens = new ArrayList();
+    public Scanner.TokenizedString tokenize(DFA dfa, String s) {
+        List<Scanner.Token> tokens = new ArrayList();
         DFA.State lastAcceptingState = null;
         int tokenBeginIndex = 0;
         int tokenLength = 0;
@@ -28,17 +30,17 @@ public class MaximalMunchScanner extends Scanner {
 
             if (lastAcceptingState != null) {
                 String tokenLexeme = s.substring(tokenBeginIndex, tokenBeginIndex + tokenLength);
-                tokens.add(new Token(lastAcceptingState.getTokenId(), tokenLexeme));
+                tokens.add(new Scanner.Token(lastAcceptingState.getTokenId(), tokenLexeme));
 
                 tokenBeginIndex = tokenBeginIndex + tokenLength;
                 tokenLength = 0;
                 lastAcceptingState = null;
                 dfa.start();
             } else {
-                return new TokenizedString(tokens, false);
+                return new Scanner.TokenizedString(tokens, false);
             }
         }
 
-        return new TokenizedString(tokens, true);
+        return new Scanner.TokenizedString(tokens, true);
     }
 }
