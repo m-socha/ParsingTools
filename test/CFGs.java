@@ -31,36 +31,36 @@ public class CFGs {
 
     public static ContextFreeGrammar getExpressionCFG() {
         ContextFreeGrammar expressionCFG = new ContextFreeGrammar();
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_LEFT_BRACKET_ID, EXPRESSION_EXPRESSION_ID, EXPRESSION_RIGHT_BRACKET_ID})));
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_NUMBER_ID})));
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_EXPRESSION_ID, EXPRESSION_PLUS_ID, EXPRESSION_EXPRESSION_ID})));
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_EXPRESSION_ID, EXPRESSION_MINUS_ID, EXPRESSION_EXPRESSION_ID})));
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_EXPRESSION_ID, EXPRESSION_MULTIPLY_ID, EXPRESSION_EXPRESSION_ID})));
-        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, new ArrayList<>(Arrays.asList(new String[] {EXPRESSION_EXPRESSION_ID, EXPRESSION_DIVIDE_ID, EXPRESSION_EXPRESSION_ID})));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_LEFT_BRACKET_ID, EXPRESSION_EXPRESSION_ID, EXPRESSION_RIGHT_BRACKET_ID));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_NUMBER_ID));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_EXPRESSION_ID, EXPRESSION_PLUS_ID, EXPRESSION_EXPRESSION_ID));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_EXPRESSION_ID, EXPRESSION_MINUS_ID, EXPRESSION_EXPRESSION_ID));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_EXPRESSION_ID, EXPRESSION_MULTIPLY_ID, EXPRESSION_EXPRESSION_ID));
+        expressionCFG.addRule(EXPRESSION_EXPRESSION_ID, Arrays.asList(EXPRESSION_EXPRESSION_ID, EXPRESSION_DIVIDE_ID, EXPRESSION_EXPRESSION_ID));
         expressionCFG.setLeadingNonterminal(EXPRESSION_EXPRESSION_ID);
         return expressionCFG;
     }
 
     public static ContextFreeGrammar getEmptyStringTestCFG() {
         ContextFreeGrammar emptyStringCFG = new ContextFreeGrammar();
-        emptyStringCFG.addRule(EMPTY_STRING_TEST_A, new ArrayList<>(Arrays.asList(new String[] {EMPTY_STRING_TEST_A, EMPTY_STRING_TEST_B, EMPTY_STRING_TEST_B, EMPTY_STRING_TEST_B})));
-        emptyStringCFG.addRule(EMPTY_STRING_TEST_A, new ArrayList<>(Arrays.asList(new String[] {EMPTY_STRING_TEST_B})));
-        emptyStringCFG.addRule(EMPTY_STRING_TEST_B, new ArrayList<>(Arrays.asList(new String[] {EMPTY_STRING_TEST_C})));
-        emptyStringCFG.addRule(EMPTY_STRING_TEST_B, new ArrayList<>(Arrays.asList(new String[] {ContextFreeGrammar.EMPTY_STRING})));
+        emptyStringCFG.addRule(EMPTY_STRING_TEST_A, Arrays.asList(EMPTY_STRING_TEST_A, EMPTY_STRING_TEST_B, EMPTY_STRING_TEST_B, EMPTY_STRING_TEST_B));
+        emptyStringCFG.addRule(EMPTY_STRING_TEST_A, Arrays.asList(EMPTY_STRING_TEST_B));
+        emptyStringCFG.addRule(EMPTY_STRING_TEST_B, Arrays.asList(EMPTY_STRING_TEST_C));
+        emptyStringCFG.addRule(EMPTY_STRING_TEST_B, Arrays.asList(ContextFreeGrammar.EMPTY_STRING));
         emptyStringCFG.setLeadingNonterminal(EMPTY_STRING_TEST_A);
         return emptyStringCFG;
     }
 
     public static ContextFreeGrammar getMatrixMultGrammar() {
         ContextFreeGrammar matrixMultGrammar = new ContextFreeGrammar();
-        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_EXPRESSION})));
-        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_EXPRESSION})));
-        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_TOKEN})));
-        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_MULT_EXPRESSION})));
-        matrixMultGrammar.addRule(MATRIX_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_SCALE_EXPRESSION})));
-        matrixMultGrammar.addRule(MATRIX_MULT_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {MATRIX_EXPRESSION, MATRIX_EXPRESSION})));
-        matrixMultGrammar.addRule(MATRIX_SCALE_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_EXPRESSION, MATRIX_EXPRESSION})));
-        matrixMultGrammar.addRule(NUMBER_EXPRESSION, new ArrayList<>(Arrays.asList(new String[] {NUMBER_TOKEN})));
+        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, Arrays.asList(MATRIX_EXPRESSION));
+        matrixMultGrammar.addRule(MATRIX_NUMBER_EXPRESSION, Arrays.asList(NUMBER_EXPRESSION));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, Arrays.asList(MATRIX_TOKEN));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, Arrays.asList(MATRIX_MULT_EXPRESSION));
+        matrixMultGrammar.addRule(MATRIX_EXPRESSION, Arrays.asList(MATRIX_SCALE_EXPRESSION));
+        matrixMultGrammar.addRule(MATRIX_MULT_EXPRESSION, Arrays.asList(MATRIX_EXPRESSION, MATRIX_EXPRESSION));
+        matrixMultGrammar.addRule(MATRIX_SCALE_EXPRESSION, Arrays.asList(NUMBER_EXPRESSION, MATRIX_EXPRESSION));
+        matrixMultGrammar.addRule(NUMBER_EXPRESSION, Arrays.asList(NUMBER_TOKEN));
         matrixMultGrammar.setLeadingNonterminal(MATRIX_NUMBER_EXPRESSION);
         return matrixMultGrammar;
     }

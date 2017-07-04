@@ -21,12 +21,12 @@ public class ContextFreeGrammarTest {
         assertEquals(CFGs.EXPRESSION_EXPRESSION_ID, expressionCFG.getLeadingNonterminal());
 
         Set<List<String>> expectedProductions = new HashSet();
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"LEFT_BRACKET", CFGs.EXPRESSION_EXPRESSION_ID, "RIGHT_BRACKET"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {"NUMBER"})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "PLUS", CFGs.EXPRESSION_EXPRESSION_ID})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "MINUS", CFGs.EXPRESSION_EXPRESSION_ID})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "MULTIPLY", CFGs.EXPRESSION_EXPRESSION_ID})));
-        expectedProductions.add(new ArrayList(Arrays.asList(new String[] {CFGs.EXPRESSION_EXPRESSION_ID, "DIVIDE", CFGs.EXPRESSION_EXPRESSION_ID})));
+        expectedProductions.add(Arrays.asList("LEFT_BRACKET", CFGs.EXPRESSION_EXPRESSION_ID, "RIGHT_BRACKET"));
+        expectedProductions.add(Arrays.asList("NUMBER"));
+        expectedProductions.add(Arrays.asList(CFGs.EXPRESSION_EXPRESSION_ID, "PLUS", CFGs.EXPRESSION_EXPRESSION_ID));
+        expectedProductions.add(Arrays.asList(CFGs.EXPRESSION_EXPRESSION_ID, "MINUS", CFGs.EXPRESSION_EXPRESSION_ID));
+        expectedProductions.add(Arrays.asList(CFGs.EXPRESSION_EXPRESSION_ID, "MULTIPLY", CFGs.EXPRESSION_EXPRESSION_ID));
+        expectedProductions.add(Arrays.asList(CFGs.EXPRESSION_EXPRESSION_ID, "DIVIDE", CFGs.EXPRESSION_EXPRESSION_ID));
         assertEquals(expectedProductions, expressionCFG.getRulesForNonterminal(CFGs.EXPRESSION_EXPRESSION_ID));
     }
 
