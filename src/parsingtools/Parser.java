@@ -70,6 +70,10 @@ public abstract class Parser {
             return mElementId != null ? mElementId : mToken.getTokenId();
         }
 
+        public Token getToken() {
+            return mToken;
+        }
+
         public List<ParseTree> getChildren() {
             return mChildren;
         }
